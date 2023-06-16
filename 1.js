@@ -1,65 +1,61 @@
-let marks = [];
-let names = [];
+const traffic = [0,0,0,0]; // index 0 is for car and so on
 
-function handleNameInput(event) {
-    names.push(event.target.value);
+function handleIncrease(index){
+    traffic[index]++;
+    rootElement.render(<App/>)
 }
 
-function handleMarksInput(event) {
-    marks.push(event.target.value);
+function handleDecrease(index){
+    if(traffic[index]<=0){
+        window.alert('No Vehicles in parking!');
+    }else{
+        traffic[index]--;
+    }
+    rootElement.render(<App/>);
+
 }
 
-function handleSubmit(event) {
-    event.preventDefault();
-    rootElement.render(<App />);
-}
 
-
-
-
-const TableOfStudents = () => (
-    <>
-        <table border='1px'>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Marks</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {names.map((value, index) => (
-                    <tr key={index}>
-                        <td>{value}</td>
-                        <td>{marks[index]}</td>
-                    </tr>
-
-                ))}
-            </tbody>
-        </table>
-    </>
-)
-
-const Form = () => (
-    <>
-        <form onSubmit={handleSubmit} >
-            <input type="text" placeholder='Enter name of student' onBlur={handleNameInput} />
-            <input type="number" placeholder='Enter marks' onBlur={handleMarksInput} />
-            <button type='submit'>Submit</button>
-        </form>
-    </>
-)
 
 const App = () => (
     <>
-        <h1>Student's Form</h1>
-        <Form />
-        <TableOfStudents />
+      <p>List of all the vehicles count in the parking.</p>
+      <ol>
+        <li>
+          <p>
+            <b>Car:{traffic[0]} </b> &emsp;
+            {/* Add increase and decrease count buttons here */}
+            <button onClick={()=>handleIncrease(0)}>Increase</button>
+            <button onClick={()=>handleDecrease(0)}>Decrease</button>
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>Bike:{traffic[1]} </b> &emsp;
+            {/* Add increase and decrease count buttons here */}
+            <button onClick={()=>handleIncrease(1)}>Increase</button>
+            <button onClick={()=>handleDecrease(1)}>Decrease</button>
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>Scooty:{traffic[2]} </b> &emsp;
+            {/* Add increase and decrease count buttons here */}
+            <button onClick={()=>handleIncrease(2)}>Increase</button>
+            <button onClick={()=>handleDecrease(2)}>Decrease</button>
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>Bicycle:{traffic[3]} </b> &emsp;
+            {/* Add increase and decrease count buttons here */}
+            <button onClick={()=>handleIncrease(3)}>Increase</button>
+            <button onClick={()=>handleDecrease(3)}>Decrease</button>
+          </p>
+        </li>
+      </ol>
     </>
-)
+  );
 
-
-
-
-const rootElement = ReactDOM.createRoot(document.getElementById('root'));
-rootElement.render(<App />);
+  const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+  rootElement.render(<App />);
